@@ -1,7 +1,4 @@
-/*
- * See https://stackoverflow.com/questions/45656949/how-to-return-the-row-and-column-index-of-a-table-cell-by-clicking
- * which includes a Jquery solution too.
- */
+"use strict";
 
 window.onload = function () {
     const cells = document.querySelectorAll('td');
