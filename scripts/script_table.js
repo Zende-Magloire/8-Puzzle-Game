@@ -62,24 +62,29 @@ function elems_exchange(i, j) {
     //console.log(`val2 = ${val2}`)
 
     //if above/below (i+/-1) empty, switch horizontal
+    let numRows = table.rows.length;
     //above
     let a = i - 1;
-    if (a >= 0 && a < table.rows.length) {
+    var above;
+    if (a >= 0) {
         let above = table.rows[a].cells[j];
     }
     //below
     let b = i + 1;
-    if (b < table.rows.length) {
+    var below;
+    if (b < numRows) {
         let below = table.rows[b].cells[j];
     }
     //right
     let r = j + 1;
-    if (r < table.rows.cells.length) {
+    var right;
+    if (r < numRows) {
         let right = table.rows[r].cells[j];
     }
     //left
     let l = j - 1;
-    if (r >= 0 && r < table.rows.cells.length) {
+    var left;
+    if (l >= 0) {
         let left = table.rows[l].cells[j];
     }
 
@@ -108,6 +113,26 @@ function elems_exchange(i, j) {
     else {
         return
     }
+
+    //is it solved?
+    if (solved(table)) {
+        console.log("won")
+    }
+}
+
+function solved(table) {
+    if (
+        table.rows[0].cells[0].innerHTML.toString == "1" &&
+        table.rows[0].cells[1].innerHTML.toString == "2" &&
+        table.rows[0].cells[2].innerHTML.toString == "3" &&
+        table.rows[1].cells[3].innerHTML.toString == "4" &&
+        table.rows[3].cells[3].innerHTML.toString == "5" &&
+        table.rows[3].cells[2].innerHTML.toString == "6" &&
+        table.rows[3].cells[0].innerHTML.toString == "7" &&
+        table.rows[2].cells[0].innerHTML.toString == "8" &&
+        table.rows[0].cells[0].innerHTML.toString == " "
+    )
+        return true;
 }
 
 
