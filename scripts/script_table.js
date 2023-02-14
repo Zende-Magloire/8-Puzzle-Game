@@ -28,23 +28,26 @@ function elems_exchange(i, j) {
 function elems_exchange(i, j) {
     const table = document.querySelector('table');
 
+    //what was pressed? - innerHTML
+    const val1 = table.rows[i].cells[j].innerHTML;
+    console.log(`val1 = ${val1}`)
+    //position of what was pressed
+    var pos1 = `${i} , ${j}`;
+    console.log(`pos1 = ${pos1}`)
+
     //find empty cell
     for (let i = 0; i < table.rows.length; i++) {
         for (let j = 0; i < table.rows[i].cells; j++)
-            if (table.rows[i].cells[j].innerHTML == " ")
-                var empty = table.rows[i].cells[j];
-        console.log("empty cell" + empty)
+            if (table.rows[i].cells[j].innerHTML.toString == " ")
+                var empty = `${i} , ${j}`;
+        console.log("empty cell: " + empty)
     }
 
-    //is the empty cell around cell that was clicked
+    //testing stuff
     console.log(`i = ${i}, j = ${j}`)
-    const val1 = table.rows[i].cells[j].innerHTML;
-    var pos1 = table.rows[i].cells[j];
-    console.log(`pos1 = ${pos1}`)
 
     //TELL ME IF I CLICK THE EMPTY ONE
-    console.log(`val1 = ${val1}`)
-    if (val1.toString == 2) {
+    if (pos1 === empty) {
         console.log(`true`)
     }
 
@@ -59,36 +62,52 @@ function elems_exchange(i, j) {
     //console.log(`val2 = ${val2}`)
 
     //if above/below (i+/-1) empty, switch horizontal
+    //above
     let a = i - 1;
+    if (a >= 0 && a < table.rows.length) {
+        let above = table.rows[a].cells[j];
+    }
+    //below
     let b = i + 1;
-    let r = i + 1;
-    let l = i - 1;
-    if (table.rows[i + 1].cells[j].innerHTML == " ") {
+    if (b < table.rows.length) {
+        let below = table.rows[b].cells[j];
+    }
+    //right
+    let r = j + 1;
+    if (r < table.rows.cells.length) {
+        let right = table.rows[r].cells[j];
+    }
+    //left
+    let l = j - 1;
+    if (r >= 0 && r < table.rows.cells.length) {
+        let left = table.rows[l].cells[j];
+    }
+
+    if (below === empty) {
         const val2 = table.rows[b].cells[j].innerHTML;
         table.rows[i].cells[j].innerHTML = val2.toString();
         table.rows[b].cells[j].innerHTML = val1.toString();
     }
-    else if (table.rows[i - 1].cells[j].innerHTML == " ") {
+    else if (above === empty) {
         const val2 = table.rows[a].cells[j].innerHTML;
         table.rows[i].cells[j].innerHTML = val2.toString();
         table.rows[a].cells[j].innerHTML = val1.toString();
     }
 
     //else if right/left (j+/-1) empty, switch vertical
-    else if (table.rows[i].cells[j + 1].innerHTML == " ") {
+    else if (right === empty) {
         const val2 = table.rows[i].cells[r].innerHTML;
         table.rows[i].cells[j].innerHTML = val2.toString();
         table.rows[i].cells[r].innerHTML = val1.toString();
     }
-    else if (table.rows[i].cells[j - 1].innerHTML == " ") {
+    else if (table.rows[i].cells[j - 1].innerHTML == " " && l < 0) {
         const val2 = table.rows[i].cells[l].innerHTML;
         table.rows[i].cells[j].innerHTML = val2.toString();
         table.rows[i].cells[l].innerHTML = val1.toString();
     }
-
-
-    //if both i and j differ by 1, do nothing
-    //if only one difference, switch
+    else {
+        return
+    }
 }
 
 
