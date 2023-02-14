@@ -31,25 +31,17 @@ function elems_exchange(i, j) {
     //what was pressed? - innerHTML
     const val1 = table.rows[i].cells[j].innerHTML;
     console.log(`val1 = ${val1}`)
-    //position of what was pressed
-    var pos1 = `${i} , ${j}`;
-    console.log(`pos1 = ${pos1}`)
 
     //find empty cell
-    for (let i = 0; i < table.rows.length; i++) {
-        for (let j = 0; i < table.rows[i].cells; j++)
-            if (table.rows[i].cells[j].innerHTML.toString == " ")
-                var empty = `${i} , ${j}`;
-        console.log("empty cell: " + empty)
-    }
+    console.log(isEmpty.toString);
 
     //testing stuff
     console.log(`i = ${i}, j = ${j}`)
-
-    //TELL ME IF I CLICK THE EMPTY ONE
-    if (pos1 === empty) {
-        console.log(`true`)
-    }
+    //valE = " "
+    // console.log(val1 === valE)
+    //position of what was pressed
+    var pos1 = `${i} , ${j}`;
+    console.log(`pos1 = ${pos1}`)
 
     //original code
     //  let k = j + 1;
@@ -62,77 +54,107 @@ function elems_exchange(i, j) {
     //console.log(`val2 = ${val2}`)
 
     //if above/below (i+/-1) empty, switch horizontal
-    let numRows = table.rows.length;
     //above
     let a = i - 1;
-    var above;
-    if (a >= 0) {
-        let above = table.rows[a].cells[j];
-    }
+    let above = `${a}, ${j}`;
+    console.log(`above= ${above}`);
+
     //below
     let b = i + 1;
-    var below;
-    if (b < numRows) {
-        let below = table.rows[b].cells[j];
-    }
+    let below = `${b}, ${j}`;
+    console.log(`below= ${below}`);
+
     //right
     let r = j + 1;
-    var right;
-    if (r < numRows) {
-        let right = table.rows[r].cells[j];
-    }
+    let right = `${i}, ${r}`;
+    console.log(`right= ${right}`);
+
     //left
     let l = j - 1;
-    var left;
+    let left = `${i}, ${l}`;
+    console.log(`left= ${left}`);
+
+    //if above/below (i+/-1) empty, switch vertical
+    if (b < table.rows.length) {
+        console.log("yes");
+        console.log(`below: ${table.rows[b].cells[j].innerHTML}`)
+        if (table.rows[b].cells[j].innerHTML === " ")
+        //or if below === isEmpty
+        {
+            const val2 = table.rows[b].cells[j].innerHTML;
+            table.rows[i].cells[j].innerHTML = val2.toString();
+            table.rows[b].cells[j].innerHTML = val1.toString();
+        }
+    }
+    if (a >= 0) {
+        console.log("yes");
+        console.log(`above: ${table.rows[a].cells[j].innerHTML}`)
+        if (table.rows[a].cells[j].innerHTML === " ")
+        //or if (above === isEmpty)
+        {
+            const val2 = table.rows[a].cells[j].innerHTML;
+            table.rows[i].cells[j].innerHTML = val2.toString();
+            table.rows[a].cells[j].innerHTML = val1.toString();
+        }
+    }
+
+    // if right/left (j+/-1) empty, switch horizontal
+    if (r <= 2) {
+        console.log("yes");
+        console.log(`right: ${table.rows[i].cells[r].innerHTML}`)
+        if (table.rows[i].cells[r].innerHTML === " ")
+        //or if (right === isEmpty)
+        {
+            const val2 = table.rows[i].cells[r].innerHTML;
+            table.rows[i].cells[j].innerHTML = val2.toString();
+            table.rows[i].cells[r].innerHTML = val1.toString();
+        }
+    }
     if (l >= 0) {
-        let left = table.rows[l].cells[j];
-    }
-
-    if (below === empty) {
-        const val2 = table.rows[b].cells[j].innerHTML;
-        table.rows[i].cells[j].innerHTML = val2.toString();
-        table.rows[b].cells[j].innerHTML = val1.toString();
-    }
-    else if (above === empty) {
-        const val2 = table.rows[a].cells[j].innerHTML;
-        table.rows[i].cells[j].innerHTML = val2.toString();
-        table.rows[a].cells[j].innerHTML = val1.toString();
-    }
-
-    //else if right/left (j+/-1) empty, switch vertical
-    else if (right === empty) {
-        const val2 = table.rows[i].cells[r].innerHTML;
-        table.rows[i].cells[j].innerHTML = val2.toString();
-        table.rows[i].cells[r].innerHTML = val1.toString();
-    }
-    else if (table.rows[i].cells[j - 1].innerHTML == " " && l < 0) {
-        const val2 = table.rows[i].cells[l].innerHTML;
-        table.rows[i].cells[j].innerHTML = val2.toString();
-        table.rows[i].cells[l].innerHTML = val1.toString();
+        console.log("yes");
+        console.log(`left: ${table.rows[i].cells[l].innerHTML}`)
+        if (table.rows[i].cells[l].innerHTML === " ")
+        //or if (left === isEmpty)
+        {
+            const val2 = table.rows[i].cells[l].innerHTML;
+            table.rows[i].cells[j].innerHTML = val2.toString();
+            table.rows[i].cells[l].innerHTML = val1.toString();
+        }
     }
     else {
         return
     }
 
     //is it solved?
-    if (solved(table)) {
-        console.log("won")
+    console.log(solved(table))
+}
+
+function isEmpty() {
+    let valE = " ";
+    for (let i = 0; i < table.rows.length; i++) {
+        for (let j = 0; i < table.rows[i].cells; j++)
+            if (table.rows[i].cells[j].innerHTML.toString === valE) {
+                // var empty = `${i} , ${j}`;
+                return i, j;
+            }
     }
 }
 
 function solved(table) {
     if (
-        table.rows[0].cells[0].innerHTML.toString == "1" &&
-        table.rows[0].cells[1].innerHTML.toString == "2" &&
-        table.rows[0].cells[2].innerHTML.toString == "3" &&
-        table.rows[1].cells[3].innerHTML.toString == "4" &&
-        table.rows[3].cells[3].innerHTML.toString == "5" &&
-        table.rows[3].cells[2].innerHTML.toString == "6" &&
-        table.rows[3].cells[0].innerHTML.toString == "7" &&
-        table.rows[2].cells[0].innerHTML.toString == "8" &&
-        table.rows[0].cells[0].innerHTML.toString == " "
+        table.rows[0].cells[0].innerHTML.toString === "1" &&
+        table.rows[0].cells[1].innerHTML.toString === "2" &&
+        table.rows[0].cells[2].innerHTML.toString === "3" &&
+        table.rows[1].cells[2].innerHTML.toString === "4" &&
+        table.rows[2].cells[2].innerHTML.toString === "5" &&
+        table.rows[2].cells[1].innerHTML.toString === "6" &&
+        table.rows[2].cells[0].innerHTML.toString === "7" &&
+        table.rows[1].cells[0].innerHTML.toString === "8" &&
+        table.rows[1].cells[1].innerHTML.toString === " "
     )
         return true;
+    else
+        return false;
 }
 
 
