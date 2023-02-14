@@ -1,19 +1,57 @@
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 50%;
     height: 50%;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 50px;
 }
 
-td,
-th {
-    border: 1px solid palevioletred;
+td {
+    border: 2px solid black;
     text-align: center;
-    padding: 80px;
+    padding: 40px;
 }
 
 tr:nth-child(even) {
     background-color: pink;
+}
+
+button {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px 25px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 20px;
+    background-color: palevioletred;
+    box-shadow: 0 5px pink;
+    color: blanchedalmond;
+    transform: translateY(4px);
+}
+
+body {
+    background-color: blanchedalmond;
+    display: grid;
+}
+
+h1 {
+    font-size: 8vh;
+    text-align: center;
+    color: palevioletred;
+    border: 2px solid pink;
+    border-radius: 20px;
+    padding: 15px 25px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2%;
+    margin-top: 0%;
+}
+
+h2 {
+    margin-top: 0%;
+    text-align: center;
+    color: gray;
 }
