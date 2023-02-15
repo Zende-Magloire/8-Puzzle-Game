@@ -30,11 +30,9 @@ function elems_exchange(i, j) {
 
     //what was pressed? - innerHTML
     const val1 = table.rows[i].cells[j].innerHTML;
-    console.log(`val1 = ${val1}`)
 
     //find empty cell
     let empty = isEmpty(table);
-    console.log(empty)
 
     //testing stuff
     //console.log(`i = ${i}, j = ${j}`)
@@ -43,6 +41,8 @@ function elems_exchange(i, j) {
     //position of what was pressed
     //var pos1 = `${i} , ${j}`;
     //console.log(`pos1 = ${pos1}`)
+    console.log(`val1 = ${val1}`)
+    console.log(empty)
 
     //original code
     //  let k = j + 1;
@@ -54,7 +54,7 @@ function elems_exchange(i, j) {
     //const val2 = table.rows[i].cells[k].innerHTML;
     //console.log(`val2 = ${val2}`)
 
-    //if above/below (i+/-1) empty, switch horizontal
+    //what to switch with
     //above
     let a = i - 1;
     let above = `${a}, ${j}`;
@@ -63,7 +63,7 @@ function elems_exchange(i, j) {
     //below
     let b = i + 1;
     let below = `${b}, ${j}`;
-    console.log(`below= ${below}`);
+    //console.log(`below= ${below}`);
 
     //right
     let r = j + 1;
@@ -121,12 +121,13 @@ function elems_exchange(i, j) {
     else {
         return
     }
+
     //is it solved?
     if (solved(table))
         alert("You won!");
 }
 
-
+//find empty cell
 function isEmpty(table) {
     //const table = document.querySelectorAll('table');
     let valE = " ";
@@ -141,6 +142,7 @@ function isEmpty(table) {
     }
 }
 
+//check if solved
 function solved(table) {
     if (
         table.rows[0].cells[0].innerHTML === "1" &&
@@ -167,12 +169,11 @@ function scrabble() {
     const table = document.querySelector('table');
 
     console.log("play");
-
+    //find empty cell
     let valE = " ";
     for (let i = 0; i < table.rows.length; i++) {
         for (let j = 0; j < table.rows.length; j++) {
             //  console.log(table.rows[i].cells[j].innerHTML)
-
             if (table.rows[i].cells[j].innerHTML === valE) {
                 //var empty = `${i} , ${j}`;
                 console.log(`${i} , ${j}`);
@@ -180,6 +181,9 @@ function scrabble() {
             }
         }
     }
+
+    //choose above, below, left or right to switch with,
+    //repeat 40x
 }
 
 
