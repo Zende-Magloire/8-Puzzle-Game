@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 window.onload = function () {
     const cells = document.querySelectorAll('td');
@@ -155,6 +155,7 @@ function solved(table) {
         table.rows[1].cells[0].innerHTML === "8" &&
         table.rows[1].cells[1].innerHTML === " "
     )
+        //chnage h2 to you win
         return true;
     else
         return false;
@@ -164,26 +165,71 @@ function solved(table) {
 //scrabble the puzzle
 const btn = document.querySelector("button");
 btn.addEventListener("click", scrabble);
+//when you hit play, btn text change to new scramble
 
 function scrabble() {
     const table = document.querySelector('table');
 
-    console.log("play");
-    //find empty cell
-    let valE = " ";
-    for (let i = 0; i < table.rows.length; i++) {
-        for (let j = 0; j < table.rows.length; j++) {
-            //  console.log(table.rows[i].cells[j].innerHTML)
-            if (table.rows[i].cells[j].innerHTML === valE) {
-                //var empty = `${i} , ${j}`;
-                console.log(`${i} , ${j}`);
-                return i, j;
+    let rand = 0;
+    let count = 0;
+    while (count <= 35) {
+        //find empty cell
+        let empty = isEmpty(table);
+        let i = empty[0];
+        let j = empty[3];
+        const val1 = table.rows[i].cells[j].innerHTML;
+        console.log(`val1 = ${val1}`);
+
+        //find surrounding cells
+        //above
+        let a = i - 1;
+        let above = `${a}, ${j}`;
+        //below
+        let b = i + 1;
+        let below = `${b}, ${j}`;
+        //right
+        let r = j + 1;
+        let right = `${i}, ${r}`;
+        //left
+        let l = j - 1;
+        let left = `${i}, ${l}`;
+
+        //choose a random number
+        rand = Math.floor(Math.random() * (4 - 0 + 1) + 0);
+        console.log(`rand = ${rand}`)
+
+        //based on the number, swap tile above, below, left or right 35x
+        if (rand == 1) {
+            if (b < table.rows.length) {
+                const val2 = table.rows[b].cells[j].innerHTML;
+                table.rows[i].cells[j].innerHTML = val2.toString();
+                table.rows[b].cells[j].innerHTML = val1.toString();
             }
         }
-    }
+        else if (rand == 2) {
+            if (a >= 0) {
+                const val2 = table.rows[a].cells[j].innerHTML;
+                table.rows[i].cells[j].innerHTML = val2.toString();
+                table.rows[a].cells[j].innerHTML = val1.toString();
+            }
+        }
+        else if (rand == 3) {
+            if (r <= 2) {
+                const val2 = table.rows[i].cells[r].innerHTML;
+                table.rows[i].cells[j].innerHTML = val2.toString();
+                table.rows[i].cells[r].innerHTML = val1.toString();
+            }
+        }
+        else if (rand == 4) {
+            if (l >= 0) {
 
-    //choose above, below, left or right to switch with,
-    //repeat 40x
+                const val2 = table.rows[i].cells[l].innerHTML;
+                table.rows[i].cells[j].innerHTML = val2.toString();
+                table.rows[i].cells[l].innerHTML = val1.toString();
+            }
+        }
+        count++
+    }
 }
 
 
