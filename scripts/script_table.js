@@ -33,7 +33,8 @@ function elems_exchange(i, j) {
     console.log(`val1 = ${val1}`)
 
     //find empty cell
-    console.log(isEmpty.toString);
+    let empty = isEmpty(table);
+    console.log(empty)
 
     //testing stuff
     //console.log(`i = ${i}, j = ${j}`)
@@ -56,31 +57,30 @@ function elems_exchange(i, j) {
     //if above/below (i+/-1) empty, switch horizontal
     //above
     let a = i - 1;
-    // let above = `${a}, ${j}`;
+    let above = `${a}, ${j}`;
     // console.log(`above= ${above}`);
 
     //below
     let b = i + 1;
-    // let below = `${b}, ${j}`;
-    //console.log(`below= ${below}`);
+    let below = `${b}, ${j}`;
+    console.log(`below= ${below}`);
 
     //right
     let r = j + 1;
-    //let right = `${i}, ${r}`;
+    let right = `${i}, ${r}`;
     //console.log(`right= ${right}`);
 
     //left
     let l = j - 1;
-    // let left = `${i}, ${l}`;
+    let left = `${i}, ${l}`;
     //console.log(`left= ${left}`);
 
     //if above/below (i+/-1) empty, switch vertical
     if (b < table.rows.length) {
-        //  console.log("yes");
+        //console.log("yes");
         //  console.log(`below: ${table.rows[b].cells[j].innerHTML}`)
-        if (table.rows[b].cells[j].innerHTML === " ")
-        //or if below === isEmpty
-        {
+        // if (table.rows[b].cells[j].innerHTML === " ")
+        if (below === empty) {
             const val2 = table.rows[b].cells[j].innerHTML;
             table.rows[i].cells[j].innerHTML = val2.toString();
             table.rows[b].cells[j].innerHTML = val1.toString();
@@ -89,9 +89,8 @@ function elems_exchange(i, j) {
     if (a >= 0) {
         // console.log("yes");
         //console.log(`above: ${table.rows[a].cells[j].innerHTML}`)
-        if (table.rows[a].cells[j].innerHTML === " ")
-        //or if (above === isEmpty)
-        {
+        // if (table.rows[a].cells[j].innerHTML === " ")
+        if (above === empty) {
             const val2 = table.rows[a].cells[j].innerHTML;
             table.rows[i].cells[j].innerHTML = val2.toString();
             table.rows[a].cells[j].innerHTML = val1.toString();
@@ -102,9 +101,8 @@ function elems_exchange(i, j) {
     if (r <= 2) {
         // console.log("yes");
         //console.log(`right: ${table.rows[i].cells[r].innerHTML}`)
-        if (table.rows[i].cells[r].innerHTML === " ")
-        //or if (right === isEmpty)
-        {
+        // if (table.rows[i].cells[r].innerHTML === " ")
+        if (right === empty) {
             const val2 = table.rows[i].cells[r].innerHTML;
             table.rows[i].cells[j].innerHTML = val2.toString();
             table.rows[i].cells[r].innerHTML = val1.toString();
@@ -113,9 +111,8 @@ function elems_exchange(i, j) {
     if (l >= 0) {
         //  console.log("yes");
         // console.log(`left: ${table.rows[i].cells[l].innerHTML}`)
-        if (table.rows[i].cells[l].innerHTML === " ")
-        //or if (left === isEmpty)
-        {
+        //if (table.rows[i].cells[l].innerHTML === " ")
+        if (left === empty) {
             const val2 = table.rows[i].cells[l].innerHTML;
             table.rows[i].cells[j].innerHTML = val2.toString();
             table.rows[i].cells[l].innerHTML = val1.toString();
@@ -130,14 +127,17 @@ function elems_exchange(i, j) {
 }
 
 
-function isEmpty() {
+function isEmpty(table) {
+    //const table = document.querySelectorAll('table');
     let valE = " ";
     for (let i = 0; i < table.rows.length; i++) {
-        for (let j = 0; i < 3; j++)
+        for (let j = 0; j < table.rows.length; j++) {
             if (table.rows[i].cells[j].innerHTML === valE) {
-                // var empty = `${i} , ${j}`;
-                console.log(`${i} , ${j}`);
+                // let empty = `${i} , ${j}`;
+                //console.log(`${i} , ${j}`);
+                return `${i}, ${j}`;
             }
+        }
     }
 }
 
@@ -158,6 +158,29 @@ function solved(table) {
         return false;
 }
 
+
+//scrabble the puzzle
+const btn = document.querySelector("button");
+btn.addEventListener("click", scrabble);
+
+function scrabble() {
+    const table = document.querySelector('table');
+
+    console.log("play");
+
+    let valE = " ";
+    for (let i = 0; i < table.rows.length; i++) {
+        for (let j = 0; j < table.rows.length; j++) {
+            //  console.log(table.rows[i].cells[j].innerHTML)
+
+            if (table.rows[i].cells[j].innerHTML === valE) {
+                //var empty = `${i} , ${j}`;
+                console.log(`${i} , ${j}`);
+                return i, j;
+            }
+        }
+    }
+}
 
 
 
