@@ -69,7 +69,7 @@ function elems_exchange(i, j) {
     if (solved(table)) {
         //you win
         var text = document.getElementById("h2");
-        text.innerHTML = "You win!"
+        text.innerHTML = "You win! Click \"RESET\" to play again or \"PLAY\" to scramble the puzzle!"
         text.style.color = "#d87093";
         text.style.border = "2px dotted black";
     }
@@ -192,13 +192,36 @@ function scrabble() {
         }
     }
 
+    //solved?
     if (solved(table)) {
         var text = document.getElementById("h2");
-        text.innerHTML = "You win!"
+        text.innerHTML = "You win! Click \"RESET\" to play again or \"PLAY\" to scramble the puzzle!"
         text.style.color = "#d87093";
         text.style.border = "2px dotted black";
     }
 }
 
+//reset/replay functionality
+const replay = document.getElementById("replay");
+replay.addEventListener("click", reset);
 
+function reset() {
+    var text = document.getElementById("h2");
+    text.innerHTML = "This is the goal state. Click \"PLAY\" to scramble the puzzle or \"RESET\" to return to the goal state!"
+    text.style.color = "#808080";
+    text.style.border = "none";
+    btn.innerHTML = "PLAY"
+
+    const table = document.querySelector('table');
+
+    table.rows[0].cells[0].innerHTML = "1";
+    table.rows[0].cells[1].innerHTML = "2";
+    table.rows[0].cells[2].innerHTML = "3";
+    table.rows[1].cells[2].innerHTML = "4";
+    table.rows[2].cells[2].innerHTML = "5";
+    table.rows[2].cells[1].innerHTML = "6";
+    table.rows[2].cells[0].innerHTML = "7";
+    table.rows[1].cells[0].innerHTML = "8";
+    table.rows[1].cells[1].innerHTML = " "
+}
 
