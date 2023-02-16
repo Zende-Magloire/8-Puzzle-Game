@@ -175,10 +175,10 @@ function scrabble() {
     while (count <= 35) {
         //find empty cell
         let empty = isEmpty(table);
-        let i = empty[0];
-        let j = empty[3];
+        let i = parseInt(empty[0]);
+        let j = parseInt(empty[3]);
         const val1 = table.rows[i].cells[j].innerHTML;
-        console.log(`val1 = ${val1}`);
+        //console.log(`val1 = ${val1}`);
 
         //find surrounding cells
         //above
@@ -195,41 +195,60 @@ function scrabble() {
         let left = `${i}, ${l}`;
 
         //choose a random number
-        rand = Math.floor(Math.random() * (4 - 0 + 1) + 0);
+        rand = Math.floor(Math.random() * (5 - 1) + 1);;
         console.log(`rand = ${rand}`)
 
         //based on the number, swap tile above, below, left or right 35x
         if (rand == 1) {
+            console.log(`b= ${b}`)
             if (b < table.rows.length) {
                 const val2 = table.rows[b].cells[j].innerHTML;
                 table.rows[i].cells[j].innerHTML = val2.toString();
                 table.rows[b].cells[j].innerHTML = val1.toString();
+                count++;
+            }
+            else {
+                count++;
             }
         }
         else if (rand == 2) {
+            console.log(`a= ${a}`)
             if (a >= 0) {
                 const val2 = table.rows[a].cells[j].innerHTML;
                 table.rows[i].cells[j].innerHTML = val2.toString();
                 table.rows[a].cells[j].innerHTML = val1.toString();
+                count++;
+            }
+            else {
+                count++;
             }
         }
         else if (rand == 3) {
+            console.log(`r= ${r}`)
             if (r <= 2) {
                 const val2 = table.rows[i].cells[r].innerHTML;
                 table.rows[i].cells[j].innerHTML = val2.toString();
                 table.rows[i].cells[r].innerHTML = val1.toString();
+                count++;
+            }
+            else {
+                count++;
             }
         }
         else if (rand == 4) {
+            console.log(`l= ${l}`)
             if (l >= 0) {
-
                 const val2 = table.rows[i].cells[l].innerHTML;
                 table.rows[i].cells[j].innerHTML = val2.toString();
                 table.rows[i].cells[l].innerHTML = val1.toString();
+                count++;
+            }
+            else {
+                count++;
             }
         }
-        count++
     }
+    console.log(`count= ${count}`)
 }
 
 
