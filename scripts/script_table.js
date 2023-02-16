@@ -191,14 +191,6 @@ function scrabble() {
             }
         }
     }
-
-    //solved?
-    if (solved(table)) {
-        var text = document.getElementById("h2");
-        text.innerHTML = "You win! Click \"RESET\" to play again from goal state or \"New scramble\" to scramble the puzzle again!"
-        text.style.color = "#d87093";
-        text.style.border = "2px dotted black";
-    }
 }
 
 //reset/replay functionality
