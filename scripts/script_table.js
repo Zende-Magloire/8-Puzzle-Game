@@ -123,8 +123,14 @@ function elems_exchange(i, j) {
     }
 
     //is it solved?
-    if (solved(table))
-        alert("You won!");
+    if (solved(table)) {
+        //you win
+        var text = document.getElementById("h2");
+        text.innerHTML = "You win!"
+        text.style.color = "#d87093";
+        text.style.border = "2px dotted black";
+
+    }
 }
 
 //find empty cell
@@ -155,7 +161,6 @@ function solved(table) {
         table.rows[1].cells[0].innerHTML === "8" &&
         table.rows[1].cells[1].innerHTML === " "
     )
-        //chnage h2 to you win
         return true;
     else
         return false;
@@ -165,10 +170,16 @@ function solved(table) {
 //scrabble the puzzle
 const btn = document.querySelector("button");
 btn.addEventListener("click", scrabble);
-//when you hit play, btn text change to new scramble
 
 function scrabble() {
+
     const table = document.querySelector('table');
+    var text = document.getElementById("h2");
+    text.innerHTML = "You are in the game!"
+    text.style.color = "#808080";
+    text.style.border = "2px dotted pink";
+
+    btn.innerHTML = "New Scramble"
 
     let rand = 0;
     let count = 0;
@@ -249,6 +260,13 @@ function scrabble() {
         }
     }
     console.log(`count= ${count}`)
+
+    if (solved(table)) {
+        var text = document.getElementById("h2");
+        text.innerHTML = "You win!"
+        text.style.color = "#d87093";
+        text.style.border = "2px dotted black";
+    }
 }
 
 
