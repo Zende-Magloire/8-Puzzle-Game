@@ -72,7 +72,6 @@ function elems_exchange(i, j) {
         text.innerHTML = "You win!"
         text.style.color = "#d87093";
         text.style.border = "2px dotted black";
-
     }
 }
 
@@ -145,11 +144,9 @@ function scrabble() {
 
         //choose a random number
         rand = Math.floor(Math.random() * (5 - 1) + 1);;
-        console.log(`rand = ${rand}`)
 
         //based on the number, swap tile above, below, left or right 35x
         if (rand == 1) {
-            console.log(`b= ${b}`)
             if (b < table.rows.length) {
                 const val2 = table.rows[b].cells[j].innerHTML;
                 table.rows[i].cells[j].innerHTML = val2.toString();
@@ -161,7 +158,6 @@ function scrabble() {
             }
         }
         else if (rand == 2) {
-            console.log(`a= ${a}`)
             if (a >= 0) {
                 const val2 = table.rows[a].cells[j].innerHTML;
                 table.rows[i].cells[j].innerHTML = val2.toString();
@@ -173,7 +169,6 @@ function scrabble() {
             }
         }
         else if (rand == 3) {
-            console.log(`r= ${r}`)
             if (r <= 2) {
                 const val2 = table.rows[i].cells[r].innerHTML;
                 table.rows[i].cells[j].innerHTML = val2.toString();
@@ -185,7 +180,6 @@ function scrabble() {
             }
         }
         else if (rand == 4) {
-            console.log(`l= ${l}`)
             if (l >= 0) {
                 const val2 = table.rows[i].cells[l].innerHTML;
                 table.rows[i].cells[j].innerHTML = val2.toString();
@@ -197,7 +191,6 @@ function scrabble() {
             }
         }
     }
-    console.log(`count= ${count}`)
 
     if (solved(table)) {
         var text = document.getElementById("h2");

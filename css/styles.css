@@ -37,6 +37,10 @@ body {
     display: grid;
 }
 
+#row {
+    display: flex;
+}
+
 h1 {
     font-size: 8vh;
     text-align: center;
